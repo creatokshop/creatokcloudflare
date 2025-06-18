@@ -1,6 +1,10 @@
 // At the top of your file
-const API_BASE = import.meta.env.VITE_API_URL || "http://localhost:5000";
+const API_BASE = import.meta.env.VITE_API_URL
 const API_KEY = import.meta.env.VITE_API_KEY
+
+console.log('API_BASE:', API_BASE);
+console.log('API_KEY:', API_KEY);
+console.log('API_KEY length:', API_KEY?.length); 
 
 import { useState, useEffect, useRef, useCallback, useMemo } from "react";
 import { CategorySelector } from "../components/CategorySelector";
@@ -301,6 +305,8 @@ export default function Home({
         },
         body: JSON.stringify(orderData),
       });
+
+      
       
       // Parse the JSON response
       const result = await response.json();
