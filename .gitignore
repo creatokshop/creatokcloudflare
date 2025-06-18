@@ -23,3 +23,21 @@ dist/
 build/
 .next/
 out/
+
+# Cloudflare Workers specific
+wrangler.toml
+.wrangler/
+worker-configuration.d.ts
+
+# Local Cloudflare development
+.dev.vars
+
+# Database exports and backups
+*.sql
+*.db
+*.sqlite
+*.sqlite3
+
+# Temporary files
+*.tmp
+*.temp
