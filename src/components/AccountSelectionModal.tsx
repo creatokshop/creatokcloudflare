@@ -128,7 +128,6 @@ export const AccountSelectionModal: React.FC<AccountSelectionModalProps> = ({
               {/* Most Sold Badge */}
               {account.isMostSold && (
                 <div className="absolute -top-1 -right-1 sm:-top-2 sm:-right-2 bg-gradient-to-r from-yellow-400 to-orange-500 text-black text-xs font-bold px-1.5 py-0.5 sm:px-2 sm:py-1 rounded-full flex items-center shadow-lg">
-                  <Star className="w-2.5 h-2.5 sm:w-3 sm:h-3 mr-0.5 sm:mr-1 fill-current" />
                   <span className="hidden sm:inline">TOP</span>
                   <span className="sm:hidden">★</span>
                 </div>
