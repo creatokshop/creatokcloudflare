@@ -397,7 +397,7 @@ const handleSubmit = useCallback(async (data: FormData) => {
         
         {/* Main content container */}
         <div className="container mx-auto -mt-10 text-center relative z-10">
-          <h1 className="text-3xl sm:text-4xl font-bold mb-6 bg-gradient-to-r from-cyan-600 via-rose-500 to-cyan-600 bg-clip-text text-transparent">
+          <h1 className="text-3xl sm:text-4xl font-bold mb-6 bg-gradient-to-r from-cyan-400 via-rose-500 to-cyan-400 bg-clip-text text-transparent">
             TIKTOK THE FUTURE OF E-COMMERCE
           </h1>
           <p className="text-xl mb-10 text-gray-300 max-w-2xl mx-auto">
