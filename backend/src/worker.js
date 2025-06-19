@@ -35,10 +35,16 @@ export default {
         return handleCreateOrder(request, env, corsHeaders);
       }
 
-      // Default response
-      return new Response('Not Found', { 
+      // Default response - FIXED: now returns valid JSON
+      return new Response(JSON.stringify({
+        success: false,
+        message: "Not Found"
+      }), {
         status: 404,
-        headers: corsHeaders 
+        headers: {
+          ...corsHeaders,
+          'Content-Type': 'application/json'
+        }
       });
 
     } catch (error) {
