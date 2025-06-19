@@ -21,7 +21,7 @@ export default function App() {
   useEffect(() => {
     const preloadResources = [
       // Main logo
-      '/images/smalllogo.avif',
+      '/images/mainlogocreatok.png',
       // Screenshot images
       '/images/img1.avif',
       '/images/img2.avif',
@@ -72,7 +72,7 @@ export default function App() {
             <div className="container mx-auto flex justify-between items-center">
               <div className="flex items-center space-x-2">
                 <img
-                  src="/images/smalllogo.avif"
+                  src="/images/mainlogocreatok.png"
                   alt="CREATOK Logo"
                   className="w-auto h-8"
                 />

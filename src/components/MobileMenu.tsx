@@ -32,7 +32,7 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({
           <picture>
             <source srcSet="/images/smalllogo.webp" type="image/webp" />
             <img
-              src="/images/logoofweb.avif"
+              src="/images/smalllogo.avif"
               alt="CREATOK Logo"
               className="w-auto h-12"
             />
