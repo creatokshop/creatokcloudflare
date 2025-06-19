@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import {
-  Box,
   Instagram,
   MessageCircle,
   ExternalLink,
@@ -42,7 +41,6 @@ export const Footer = () => {
         <div className="grid grid-cols-2 md:grid-cols-3 gap-5 mb-4">
           <div>
             <div className="flex items-center space-x-2 mb-2">
-              <Box className="w-4 h-4 text-cyan-400" />
               <span className="text-base font-bold tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-rose-400">
                 CREATOK
               </span>

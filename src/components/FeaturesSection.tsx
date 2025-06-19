@@ -20,7 +20,7 @@ export const FeaturesSection: React.FC = () => (
     <div className="absolute inset-0 bg-gray-800 opacity-80"></div>
     
     <div className="container mx-auto relative z-10">
-      <h2 className="py-2 text-3xl mb-1 mt-10 font-bold text-center bg-gradient-to-r from-cyan-400 via-rose-500 to-cyan-400 bg-clip-text text-transparent">
+      <h2 className="py-2 text-3xl mb-1 mt-10 font-bold text-center text-white bg-clip-text text-transparent">
         How It Works
       </h2>
       {/* Modified grid to be 1 column on mobile, 3 columns on tablets, and 5 columns on larger screens */}

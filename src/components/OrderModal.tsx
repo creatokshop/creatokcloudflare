@@ -175,7 +175,7 @@ export const OrderModal: React.FC<OrderModalProps> = ({
             name="country"
             value="United Kingdom"
             readOnly
-            className="w-full bg-gray-700 rounded-lg p-3 text-white focus:outline-none"
+            className="w-full bg-gray-700 rounded-lg p-2 sm:p-3 text-white text-sm focus:outline-none"
             disabled={isSubmitting}
           />
         );
@@ -187,7 +187,7 @@ export const OrderModal: React.FC<OrderModalProps> = ({
             name="country"
             value="United States"
             readOnly
-            className="w-full bg-gray-700 rounded-lg p-3 text-white focus:outline-none"
+            className="w-full bg-gray-700 rounded-lg p-2 sm:p-3 text-white text-sm focus:outline-none"
             disabled={isSubmitting}
           />
         );
@@ -199,7 +199,7 @@ export const OrderModal: React.FC<OrderModalProps> = ({
             name="country"
             value="Germany/France"
             readOnly
-            className="w-full bg-gray-700 rounded-lg p-3 text-white focus:outline-none"
+            className="w-full bg-gray-700 rounded-lg p-2 sm:p-3 text-white text-sm focus:outline-none"
             disabled={isSubmitting}
           />
         );
@@ -210,7 +210,7 @@ export const OrderModal: React.FC<OrderModalProps> = ({
             name="country"
             value={formData.country}
             onChange={handleFormChange}
-            className="w-full bg-gray-700 rounded-lg p-3 text-white focus:outline-none"
+            className="w-full bg-gray-700 rounded-lg p-2 sm:p-3 text-white text-sm focus:outline-none"
             disabled={isSubmitting}
           >
             <option value="">Select country</option>
@@ -222,14 +222,14 @@ export const OrderModal: React.FC<OrderModalProps> = ({
   return (
     <>
       {orderModal && (
-        <div className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50 p-4 overflow-y-auto">
-          <div className="bg-gray-800 rounded-xl p-6 w-full max-w-md my-8">
-            <div className="flex justify-between items-center mb-4">
-              <div className="flex items-center">
-                <h3 className="text-xl font-bold">
+        <div className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50 p-2 sm:p-4 overflow-y-auto">
+          <div className="bg-gray-800 rounded-xl p-3 sm:p-6 w-full max-w-xs sm:max-w-md my-4 sm:my-8 max-h-[95vh] overflow-y-auto">
+            <div className="flex justify-between items-start mb-3 sm:mb-4">
+              <div className="flex items-start flex-col sm:flex-row sm:items-center">
+                <h3 className="text-lg sm:text-xl font-bold leading-tight">
                   {`Place Your ${encodeHTML(selectedCard)} Order`}
                 </h3>
-                <span className="ml-3 px-2 py-1 text-xs font-medium rounded bg-gray-700 text-gray-300">
+                <span className="mt-1 sm:mt-0 sm:ml-3 px-2 py-1 text-xs font-medium rounded bg-gray-700 text-gray-300">
                   {activeCategory === "verified" ? "Verified" : "Non-Verified"}
                 </span>
               </div>
@@ -238,33 +238,33 @@ export const OrderModal: React.FC<OrderModalProps> = ({
                   resetForm();
                   setOrderModal(false);
                 }}
-                className="text-gray-400 hover:text-white"
+                className="text-gray-400 hover:text-white flex-shrink-0 ml-2"
                 aria-label="Close"
                 disabled={isSubmitting}
               >
-                <X className="w-6 h-6" />
+                <X className="w-5 h-5 sm:w-6 sm:h-6" />
               </button>
             </div>
 
-            <div role="form" className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div role="form" className="space-y-3 sm:space-y-4">
               {/* Selected Account Display */}
               {selectedAccount && (
-                <div className="md:col-span-2 mb-4">
-                  <label className="block text-gray-300 mb-1 text-sm">
+                <div className="mb-3 sm:mb-4">
+                  <label className="block text-gray-300 mb-1 text-xs sm:text-sm">
                     Selected Account
                   </label>
-                  <div className="w-full bg-gray-600 rounded-lg p-3 text-white border-l-4 border-cyan-500">
+                  <div className="w-full bg-gray-600 rounded-lg p-2 sm:p-3 text-white border-l-4 border-cyan-500">
                     <div className="flex items-center justify-between">
-                      <div>
-                        <div className="font-semibold">
+                      <div className="min-w-0 flex-1">
+                        <div className="font-semibold text-sm sm:text-base truncate">
                           {selectedAccount.title}
                         </div>
-                        <div className="text-sm text-gray-300">
+                        <div className="text-xs sm:text-sm text-gray-300">
                           {selectedAccount.followers} followers • {selectedAccount.verified ? 'Verified' : 'Non-Verified'}
                         </div>
                       </div>
-                      <div className="text-right">
-                        <div className="font-bold text-lg text-cyan-400">
+                      <div className="text-right ml-2">
+                        <div className="font-bold text-base sm:text-lg text-cyan-400">
                           ${selectedAccount.price}
                         </div>
                       </div>
@@ -273,95 +273,98 @@ export const OrderModal: React.FC<OrderModalProps> = ({
                 </div>
               )}
 
-              <div>
-                <label
-                  htmlFor="name"
-                  className="block text-gray-300 mb-1 text-sm"
-                >
-                  Full Name
-                </label>
-                <input
-                  type="text"
-                  id="name"
-                  name="name"
-                  value={formData.name}
-                  onChange={(e) => {
-                    // Clear any validation errors when typing
-                    e.target.setCustomValidity('');
-                    handleFormChange(e);
-                  }}
-                  className="w-full bg-gray-700 rounded-lg p-2 text-white focus:outline-none text-sm"
-                  maxLength={100}
-                  required
-                  disabled={isSubmitting}
-                />
-              </div>
-
-              <div>
-                <label
-                  htmlFor="email"
-                  className="block text-gray-300 mb-1 text-sm"
-                >
-                  Email Address
-                </label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={(e) => {
-                    // Clear any validation errors when typing
-                    e.target.setCustomValidity('');
-                    handleFormChange(e);
-                  }}
-                  className="w-full bg-gray-700 rounded-lg p-2 text-white focus:outline-none text-sm"
-                  maxLength={100}
-                  required
-                  disabled={isSubmitting}
-                />
-              </div>
-
-              <div>
-                <label
-                  htmlFor="phone"
-                  className="block text-gray-300 mb-1 text-sm"
-                >
-                  Phone Number
-                </label>
-                <input
-                  type="text"
-                  id="phone"
-                  name="phone"
-                  value={formData.phone}
-                  onChange={(e) => {
-                    // Clear any validation errors when typing
-                    e.target.setCustomValidity('');
-                    const newValue = e.target.value;
-                    if (newValue === "" || /^[\d\s()+-]*$/.test(newValue)) {
+              {/* Form fields in single column on mobile, two columns on larger screens */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+                <div>
+                  <label
+                    htmlFor="name"
+                    className="block text-gray-300 mb-1 text-xs sm:text-sm"
+                  >
+                    Full Name
+                  </label>
+                  <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    value={formData.name}
+                    onChange={(e) => {
+                      // Clear any validation errors when typing
+                      e.target.setCustomValidity('');
                       handleFormChange(e);
-                    }
-                  }}
-                  className="w-full bg-gray-700 rounded-lg p-2 text-white focus:outline-none text-sm"
-                  maxLength={20}
-                  inputMode="tel"
-                  disabled={isSubmitting}
-                />
+                    }}
+                    className="w-full bg-gray-700 rounded-lg p-2 text-white focus:outline-none text-sm"
+                    maxLength={100}
+                    required
+                    disabled={isSubmitting}
+                  />
+                </div>
+
+                <div>
+                  <label
+                    htmlFor="email"
+                    className="block text-gray-300 mb-1 text-xs sm:text-sm"
+                  >
+                    Email Address
+                  </label>
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={(e) => {
+                      // Clear any validation errors when typing
+                      e.target.setCustomValidity('');
+                      handleFormChange(e);
+                    }}
+                    className="w-full bg-gray-700 rounded-lg p-2 text-white focus:outline-none text-sm"
+                    maxLength={100}
+                    required
+                    disabled={isSubmitting}
+                  />
+                </div>
+
+                <div>
+                  <label
+                    htmlFor="phone"
+                    className="block text-gray-300 mb-1 text-xs sm:text-sm"
+                  >
+                    Phone Number
+                  </label>
+                  <input
+                    type="text"
+                    id="phone"
+                    name="phone"
+                    value={formData.phone}
+                    onChange={(e) => {
+                      // Clear any validation errors when typing
+                      e.target.setCustomValidity('');
+                      const newValue = e.target.value;
+                      if (newValue === "" || /^[\d\s()+-]*$/.test(newValue)) {
+                        handleFormChange(e);
+                      }
+                    }}
+                    className="w-full bg-gray-700 rounded-lg p-2 text-white focus:outline-none text-sm"
+                    maxLength={20}
+                    inputMode="tel"
+                    disabled={isSubmitting}
+                  />
+                </div>
+
+                <div>
+                  <label
+                    htmlFor="country"
+                    className="block text-gray-300 mb-1 text-xs sm:text-sm"
+                  >
+                    Country
+                  </label>
+                  {renderCountryField()}
+                </div>
               </div>
 
               <div>
-                <label
-                  htmlFor="country"
-                  className="block text-gray-300 mb-1 text-sm"
-                >
-                  Country
-                </label>
-                {renderCountryField()}
-              </div>
-
-              <div className="md:col-span-2">
                 <label
                   htmlFor="contactMethod"
-                  className="block text-gray-300 mb-1 text-sm"
+                  className="block text-gray-300 mb-1 text-xs sm:text-sm"
                 >
                   Your contact preference
                 </label>
@@ -388,10 +391,10 @@ export const OrderModal: React.FC<OrderModalProps> = ({
               </div>
 
               {formData.contactMethod === "discord" && (
-                <div className="md:col-span-2">
+                <div>
                   <label
                     htmlFor="username"
-                    className="block text-gray-300 mb-1 text-sm"
+                    className="block text-gray-300 mb-1 text-xs sm:text-sm"
                   >
                     Discord Username
                   </label>
@@ -414,10 +417,10 @@ export const OrderModal: React.FC<OrderModalProps> = ({
                 </div>
               )}
 
-              <div className="md:col-span-2">
+              <div>
                 <label
                   htmlFor="message"
-                  className="block text-gray-300 mb-1 text-sm"
+                  className="block text-gray-300 mb-1 text-xs sm:text-sm"
                 >
                   Order Details (e.g. number of followers)
                 </label>
@@ -426,7 +429,7 @@ export const OrderModal: React.FC<OrderModalProps> = ({
                   name="message"
                   value={formData.message}
                   onChange={handleFormChange}
-                  className="w-full bg-gray-700 rounded-lg p-2 text-white h-16 focus:outline-none text-sm"
+                  className="w-full bg-gray-700 rounded-lg p-2 text-white h-12 sm:h-16 focus:outline-none text-sm resize-none"
                   maxLength={1000}
                   disabled={isSubmitting}
                 ></textarea>
@@ -441,10 +444,10 @@ export const OrderModal: React.FC<OrderModalProps> = ({
                 }
               />
 
-              <div className="md:col-span-2 mt-2">
+              <div className="mt-4">
                 <button
                   onClick={validateAndSubmit}
-                  className="w-full py-2 rounded-lg bg-gradient-to-r from-cyan-600 via-rose-500 to-cyan-600 hover:opacity-90 transition-all flex items-center justify-center"
+                  className="w-full py-2.5 sm:py-2 rounded-lg bg-gradient-to-r from-cyan-600 via-rose-500 to-cyan-600 hover:opacity-90 transition-all flex items-center justify-center text-sm sm:text-base font-medium"
                   aria-label="Submit Order"
                   disabled={isSubmitting}
                 >

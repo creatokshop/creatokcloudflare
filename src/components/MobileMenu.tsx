@@ -29,11 +29,14 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({
     >
       <div className="flex justify-between items-center mb-8">
         <div className="flex items-center space-x-2">
-          <img
-            src="/images/mainlogocreatok.png"
-            alt="CREATOK Logo"
-            className="w-auto h-8"
-          />
+          <picture>
+            <source srcSet="/images/smalllogo.webp" type="image/webp" />
+            <img
+              src="/images/smalllogo.avif"
+              alt="CREATOK Logo"
+              className="w-auto h-12"
+            />
+          </picture>
         </div>
         <button
           onClick={() => setIsMenuOpen(false)}

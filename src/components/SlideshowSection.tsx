@@ -163,7 +163,7 @@ export const SlideshowSection: React.FC<SlideshowSectionProps> = ({
       <div className="absolute inset-0 bg-gradient-to-t from-gray-900 to-gray-800 opacity-80"></div>
       
       <div className="container mx-auto -mt-15 text-center px-4 relative z-10">
-        <h1 className="py-5 text-2xl sm:text-3xl font-bold mb-5 bg-gradient-to-r from-cyan-600 via-rose-500 to-cyan-600 bg-clip-text text-transparent">
+        <h1 className="py-5 text-2xl sm:text-3xl font-bold mb-5 text-white bg-clip-text text-transparent">
           TikTok Programs Available
         </h1>
 

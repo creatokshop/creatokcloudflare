@@ -61,7 +61,7 @@ export const ReviewsSection = () => {
   return (
     <section className="py-8 sm:py-10 px-3 bg-gray-900">
       <div className="max-w-7xl mx-auto">
-        <h2 className="text-2xl sm:text-3xl font-bold mb-6 text-center bg-gradient-to-r from-cyan-400 via-rose-500 to-cyan-400 bg-clip-text text-transparent">
+        <h2 className="text-2xl sm:text-3xl font-bold mb-6 text-center text-white bg-clip-text text-transparent">
           Client Reviews
         </h2>
 

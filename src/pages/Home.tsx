@@ -2,6 +2,7 @@
 const API_BASE = import.meta.env.VITE_API_URL
 const API_KEY = import.meta.env.VITE_API_KEY
 
+
 import { useState, useEffect, useRef, useCallback, useMemo } from "react";
 import { CategorySelector } from "../components/CategorySelector";
 import { AccountCards } from "../components/AccountCards";
@@ -120,6 +121,37 @@ export default function Home({
   ], [bannerImage, screenshots, regionLogos]);
   
   const { isLoading, progress } = usePageLoader(resources, 3000);
+
+  // Body scroll lock effect - prevents scrolling when modals are open
+  useEffect(() => {
+    const isAnyModalOpen = orderModal || accountSelectionModal || showConfirmation;
+    
+    if (isAnyModalOpen) {
+      // Save current scroll position
+      const scrollY = window.scrollY;
+      
+      // Lock body scroll
+      document.body.style.position = 'fixed';
+      document.body.style.top = `-${scrollY}px`;
+      document.body.style.width = '100%';
+      document.body.style.overflow = 'hidden';
+      
+      // Cleanup function to restore scroll
+      return () => {
+        document.body.style.position = '';
+        document.body.style.top = '';
+        document.body.style.width = '';
+        document.body.style.overflow = '';
+        window.scrollTo(0, scrollY);
+      };
+    } else {
+      // Ensure body scroll is unlocked when no modals are open
+      document.body.style.position = '';
+      document.body.style.top = '';
+      document.body.style.width = '';
+      document.body.style.overflow = '';
+    }
+  }, [orderModal, accountSelectionModal, showConfirmation]);
 
   // FIXED: Separate the loading logic and remove function dependencies
   useEffect(() => {
@@ -274,61 +306,60 @@ export default function Home({
     return () => window.removeEventListener("mousemove", handleMouseMove);
   }, []);
 
-  // FIXED: Use useCallback for submit handler
-  const handleSubmit = useCallback(async (data: FormData) => {
-    setIsSubmitting(true);
-    try {
-      // Prepare data for the API
-      const orderData = {
-        ...data,
-        selectedCard, // Include the selected card type
-        selectedAccount: selectedAccount ? {
-          id: selectedAccount.id,
-          title: selectedAccount.title,
-          followers: selectedAccount.followers,
-          price: selectedAccount.price,
-          verified: selectedAccount.verified
-        } : null
-      };
+  // Replace your handleSubmit function with this improved version
+const handleSubmit = useCallback(async (data: FormData) => {
+  setIsSubmitting(true);
+  try {
+    // Prepare data for the API
+    const orderData = {
+      ...data,
+      selectedCard, // Include the selected card type
+      selectedAccount: selectedAccount ? {
+        id: selectedAccount.id,
+        title: selectedAccount.title,
+        followers: selectedAccount.followers,
+        price: selectedAccount.price,
+        verified: selectedAccount.verified
+      } : null
+    };
+    
+    // Fix URL construction to handle trailing slashes
+    const baseUrl = API_BASE.endsWith('/') ? API_BASE.slice(0, -1) : API_BASE;
+    const apiUrl = `${baseUrl}/api/orders`;
+    
+    const response = await fetch(apiUrl, {
+      method: 'POST',
+      headers: { 
+        'Content-Type': 'application/json',
+        'x-api-key': API_KEY // Add the API key here
+      },
+      body: JSON.stringify(orderData),
+    });
+    
+    // Parse the JSON response
+    const result = await response.json();
 
-      console.log("Submitting order to API:", orderData);
-      
-      const response = await fetch(`${API_BASE}/api/orders`, {
-        method: 'POST',
-        headers: { 
-          'Content-Type': 'application/json',
-          'x-api-key': API_KEY // Add the API key here
-        },
-        body: JSON.stringify(orderData),
-      });
-
-      
-      
-      // Parse the JSON response
-      const result = await response.json();
-
-      // Handle the response
-      if (result.success) {
-        // Show success confirmation instead of alert
-        setConfirmationStatus('success');
-        setShowConfirmation(true);
-        resetForm();
-        setSelectedAccount(null); // Reset selected account
-        setOrderModal(false);
-      } else {
-        // Show error confirmation instead of alert
-        setConfirmationStatus('error');
-        setShowConfirmation(true);
-      }
-    } catch (error) {
-      console.error("Error in handleSubmit:", error);
+    // Handle the response
+    if (result.success) {
+      // Show success confirmation instead of alert
+      setConfirmationStatus('success');
+      setShowConfirmation(true);
+      resetForm();
+      setSelectedAccount(null); // Reset selected account
+      setOrderModal(false);
+    } else {
       // Show error confirmation instead of alert
       setConfirmationStatus('error');
       setShowConfirmation(true);
-    } finally {
-      setIsSubmitting(false);
     }
-  }, [selectedCard, selectedAccount, resetForm]);
+  } catch (error) {
+    // Show error confirmation instead of alert
+    setConfirmationStatus('error');
+    setShowConfirmation(true);
+  } finally {
+    setIsSubmitting(false);
+  }
+}, [selectedCard, selectedAccount, resetForm]);
 
   // Handler for closing the confirmation - use useCallback
   const handleCloseConfirmation = useCallback(() => {
@@ -366,7 +397,7 @@ export default function Home({
         
         {/* Main content container */}
         <div className="container mx-auto -mt-10 text-center relative z-10">
-          <h1 className="text-3xl sm:text-4xl font-bold mb-6 bg-gradient-to-r from-cyan-600 via-rose-500 to-cyan-600 bg-clip-text text-transparent">
+          <h1 className="text-3xl sm:text-4xl font-bold mb-6 text-white bg-clip-text text-transparent">
             TIKTOK THE FUTURE OF E-COMMERCE
           </h1>
           <p className="text-xl mb-10 text-gray-300 max-w-2xl mx-auto">
