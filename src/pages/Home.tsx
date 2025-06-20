@@ -397,9 +397,9 @@ const handleSubmit = useCallback(async (data: FormData) => {
         
         {/* Main content container */}
         <div className="container mx-auto -mt-10 text-center relative z-10">
-          <h1 className="text-3xl sm:text-4xl font-bold mb-6 text-white bg-clip-text text-transparent">
-            TIKTOK THE FUTURE OF E-COMMERCE
-          </h1>
+            <h1 className="text-2xl sm:text-4xl font-bold mb-6 sm:text-white bg-gradient-to-r from-cyan-600 via-rose-500 to-cyan-600 bg-clip-text text-transparent">
+  <span className="hidden sm:inline">TIKTOK </span>THE FUTURE OF E-COMMERCE
+</h1>
           <p className="text-xl mb-10 text-gray-300 max-w-2xl mx-auto">
             Choose between verified or non-verified accounts
           </p>
