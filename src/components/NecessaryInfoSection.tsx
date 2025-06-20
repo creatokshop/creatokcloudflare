@@ -13,7 +13,7 @@ export const NecessaryInfoSection: React.FC = () => {
   return (
     <section className="py-12 px-4 bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900">
       <div className="container mx-auto max-w-7xl px-6">
-        <h2 className="text-3xl font-bold mb-8 text-center text-white bg-clip-text text-transparent">
+        <h2 className="text-2xl sm:text-3xl font-bold mb-8 text-center text-white bg-clip-text text-transparent">
           Important Information
         </h2>
         <div className=" rounded-xl p-6 sm:p-8 shadow-lg border border-white-500/20 mb-8">
